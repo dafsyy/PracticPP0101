@@ -17,12 +17,19 @@ class AddressActivity : AppCompatActivity() {
 
         binding.btnContinue.setOnClickListener {
 
-            startActivity(
-                Intent(
-                    this,
-                    MainActivity::class.java
-                )
+            val address = binding.etAddress.text.toString()
+
+            val intent = Intent(
+                this,
+                MainActivity::class.java
             )
+
+            intent.putExtra(
+                "USER_ADDRESS",
+                address
+            )
+
+            startActivity(intent)
 
             finish()
         }

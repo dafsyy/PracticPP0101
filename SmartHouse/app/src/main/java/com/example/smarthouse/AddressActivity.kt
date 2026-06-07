@@ -15,7 +15,7 @@ class AddressActivity : AppCompatActivity() {
         binding = ActivityAddressBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btnContinue.setOnClickListener {
+        binding.btnSave.setOnClickListener {
 
             val address = binding.etAddress.text.toString()
 

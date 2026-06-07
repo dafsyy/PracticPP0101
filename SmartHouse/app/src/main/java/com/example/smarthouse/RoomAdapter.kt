@@ -47,4 +47,6 @@ class RoomAdapter(
     ) {
         holder.bind(rooms[position])
     }
+
+
 }

@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="#303030"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_back" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutHood"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Освещение"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/switchLight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Автовключение"
+                android:textSize="18sp" />
+
+            <Switch
+                android:id="@+id/switchAuto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <RadioGroup
+                android:id="@+id/radioSpeed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <RadioButton
+                    android:id="@+id/rbLow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Низкая" />
+
+                <RadioButton
+                    android:id="@+id/rbMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Средняя" />
+
+                <RadioButton
+                    android:id="@+id/rbHigh"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Высокая" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layoutFloor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Температура"
+                android:textSize="18sp" />
+
+            <SeekBar
+                android:id="@+id/seekTemperature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="35" />
+
+            <TextView
+                android:id="@+id/tvTemperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20°C"
+                android:textSize="18sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Дни работы"
+                android:textSize="18sp" />
+
+            <CheckBox
+                android:id="@+id/cbMon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Понедельник" />
+
+            <CheckBox
+                android:id="@+id/cbTue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Вторник" />
+
+            <CheckBox
+                android:id="@+id/cbWed"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Среда" />
+
+            <CheckBox
+                android:id="@+id/cbThu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Четверг" />
+
+            <CheckBox
+                android:id="@+id/cbFri"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Пятница" />
+
+            <CheckBox
+                android:id="@+id/cbSat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Суббота" />
+
+            <CheckBox
+                android:id="@+id/cbSun"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Воскресенье" />
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/btnSave"
+            android:layout_width="250dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/button_login"
+            android:backgroundTint="@null"
+            android:text="СОХРАНИТЬ"
+            android:textColor="#FFFFFF"/>
+    </LinearLayout>
+
+</ScrollView>

@@ -4,98 +4,85 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="centerCrop"
-        android:src="@drawable/login_background"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#998CC8F6"/>
-
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
-        android:src="@drawable/ic_logo"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="90dp"/>
-
-    <TextView
-        android:id="@+id/tvTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Введите адрес"
-        android:textColor="#FFFFFF"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/imgLogo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"/>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardAddress"
+    <LinearLayout
+        android:id="@+id/header"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginTop="40dp"
-        app:cardCornerRadius="12dp"
-        app:cardBackgroundColor="#55FFFFFF"
-        app:layout_constraintTop_toBottomOf="@id/tvTitle"
+        android:background="#303030"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@android:color/transparent"
+            android:padding="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_back"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Адрес"
-                android:textColor="#B77E86"
-                android:textStyle="bold"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:text="Добавить адрес"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold"/>
 
-            <EditText
-                android:id="@+id/etAddress"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@android:color/transparent"
-                android:hint="Введите адрес"/>
+    </LinearLayout>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#444444"/>
+    <TextView
+        android:id="@+id/tvInfo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="40dp"
+        android:text="Добавьте адрес своего дома в формате&#10;г. Название города, ул. Название улицы,&#10;д. Номер дома"
+        android:textColor="#000000"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
-        </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnContinue"
+    <EditText
+        android:id="@+id/etAddress"
         android:layout_width="0dp"
         android:layout_height="56dp"
-        android:layout_marginStart="60dp"
-        android:layout_marginEnd="60dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="32dp"
+        android:background="@drawable/address_input"
+        android:hint="Введите адрес"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/tvInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnSave"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginTop="32dp"
+        android:text="Сохранить"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold"
+        android:textSize="18sp"
         android:background="@drawable/button_login"
         android:backgroundTint="@null"
-        android:text="Продолжить"
-        android:textColor="#FFFFFF"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/cardAddress"
+        app:layout_constraintTop_toBottomOf="@id/etAddress"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

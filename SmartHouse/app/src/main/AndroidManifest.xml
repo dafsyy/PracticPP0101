@@ -19,7 +19,11 @@
         <activity android:name=".PinLoginActivity"/>
         <activity android:name=".LoginActivity"/>
         <activity android:name=".RegisterActivity"/>
-
+        <activity android:name=".CustomRoomActivity"/>
+        <activity android:name=".RoomDevicesActivity"/>
+        <activity android:name=".AddDeviceActivity"/>
+        <activity android:name=".DeviceSettingsActivity"/>
+        <activity android:name=".SettingsActivity"/>
         <activity
             android:name=".SplashActivity"
             android:exported="true">

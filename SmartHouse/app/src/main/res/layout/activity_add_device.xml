@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="#303030"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/ic_back"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Добавить устройство"
+                android:textColor="#FFFFFF"
+                android:textSize="22sp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/etDeviceName"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="Название устройства"
+            android:padding="12dp"/>
+
+        <EditText
+            android:id="@+id/etDeviceId"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/edit_text_background"
+            android:hint="Идентификатор устройства"
+            android:padding="12dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="20dp"
+            android:text="Выберите устройство"
+            android:textSize="18sp"
+            android:textStyle="bold"/>
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:columnCount="3">
+
+            <ImageView
+                android:id="@+id/imgLight"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_light_gray"/>
+
+            <ImageView
+                android:id="@+id/imgConditioner"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_air_conditioner_gray"/>
+
+            <ImageView
+                android:id="@+id/imgHood"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_hood_gray"/>
+
+            <ImageView
+                android:id="@+id/imgFloorHeating"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_floor_heating_gray"/>
+
+            <ImageView
+                android:id="@+id/imgFan"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_margin="8dp"
+                android:src="@drawable/ic_fan_gray"/>
+
+        </GridLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="250dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="24dp"
+            android:background="@drawable/button_login"
+            android:text="СОХРАНИТЬ"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+
+</ScrollView>

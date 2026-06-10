@@ -24,6 +24,7 @@
         <activity android:name=".AddDeviceActivity"/>
         <activity android:name=".DeviceSettingsActivity"/>
         <activity android:name=".SettingsActivity"/>
+        <activity android:name=".CreateRoomTypeActivity"/>
         <activity
             android:name=".SplashActivity"
             android:exported="true">

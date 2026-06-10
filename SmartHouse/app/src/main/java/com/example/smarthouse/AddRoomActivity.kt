@@ -12,6 +12,26 @@ class AddRoomActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAddRoomBinding
     private var selectedRoom = "living_room"
 
+    private val createTypeLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+
+            if (result.resultCode == RESULT_OK) {
+
+                val customType =
+                    result.data?.getStringExtra(
+                        "CUSTOM_ROOM_TYPE"
+                    ) ?: return@registerForActivityResult
+
+                binding.etRoomName.setText(customType)
+
+                binding.etRoomName.isEnabled = true
+
+                selectedRoom = customType
+            }
+        }
+
     private val customRoomLauncher =
         registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -86,7 +106,11 @@ class AddRoomActivity : AppCompatActivity() {
 
             val resultIntent = Intent()
 
-            resultIntent.putExtra("ROOM_NAME", roomName)
+            val finalRoomName = roomName
+            resultIntent.putExtra(
+                "ROOM_NAME",
+                finalRoomName
+            )
             resultIntent.putExtra("ROOM_TYPE", selectedRoom)
 
             setResult(RESULT_OK, resultIntent)
@@ -191,10 +215,10 @@ class AddRoomActivity : AppCompatActivity() {
     }
     private fun selectOther() {
 
-        customRoomLauncher.launch(
+        createTypeLauncher.launch(
             Intent(
                 this,
-                CustomRoomActivity::class.java
+                CreateRoomTypeActivity::class.java
             )
         )
     }

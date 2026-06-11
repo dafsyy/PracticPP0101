@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -7,7 +6,6 @@
     android:background="#FFFFFF">
 
     <!-- Шапка -->
-
     <LinearLayout
         android:id="@+id/header"
         android:layout_width="0dp"
@@ -25,7 +23,10 @@
             android:id="@+id/btnBack"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:src="@drawable/ic_back" />
+            android:src="@drawable/ic_back"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -35,11 +36,10 @@
             android:textColor="#FFFFFF"
             android:textSize="22sp"
             android:textStyle="bold" />
-
     </LinearLayout>
 
     <TextView
-        android:id="@+id/tvRoomName"
+        android:id="@+id/tvRoomNameLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
@@ -54,17 +54,18 @@
     <EditText
         android:id="@+id/etRoomName"
         android:layout_width="0dp"
-        android:layout_height="55dp"
+        android:layout_height="50dp"
         android:layout_marginStart="20dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="20dp"
-        android:background="@drawable/edit_text_background"
+        android:background="@android:drawable/edit_text"
+        android:hint="Название появится после выбора"
+        android:paddingStart="12dp"
+        android:textSize="16sp"
         android:enabled="false"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvRoomName" />
+        app:layout_constraintTop_toBottomOf="@id/tvRoomNameLabel" />
 
     <TextView
         android:id="@+id/tvChooseRoom"
@@ -72,106 +73,205 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginTop="24dp"
-        android:text="Выберите комнату"
+        android:text="Выберите тип комнаты"
         android:textColor="#000000"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/etRoomName" />
 
-    <!-- Первый ряд -->
-
-    <LinearLayout
-        android:id="@+id/row1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        app:layout_constraintBottom_toTopOf="@id/btnSave"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvChooseRoom">
 
-        <ImageView
-            android:id="@+id/imgLivingRoom"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_living_room" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingBottom="20dp">
 
-        <ImageView
-            android:id="@+id/imgKitchen"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginStart="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_kitchen_gray" />
+            <GridLayout
+                android:id="@+id/gridRooms"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:useDefaultMargins="true">
 
-        <ImageView
-            android:id="@+id/imgBathroom"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginStart="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_bathroom_gray" />
+                <!-- Гостиная -->
+                <LinearLayout
+                    android:id="@+id/containerLivingRoom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="8dp">
+                    <ImageView
+                        android:id="@+id/imgLivingRoom"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_living_room_gray" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Гостиная"
+                        android:textSize="12sp"
+                        android:textColor="#303030"/>
+                </LinearLayout>
 
-    </LinearLayout>
+                <!-- Кухня -->
+                <LinearLayout
+                    android:id="@+id/containerKitchen"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="8dp">
+                    <ImageView
+                        android:id="@+id/imgKitchen"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_kitchen_gray" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Кухня"
+                        android:textSize="12sp"
+                        android:textColor="#303030"/>
+                </LinearLayout>
 
-    <!-- Второй ряд -->
+                <!-- Ванная -->
+                <LinearLayout
+                    android:id="@+id/containerBathroom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="8dp">
+                    <ImageView
+                        android:id="@+id/imgBathroom"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_bathroom_gray" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ванная"
+                        android:textSize="12sp"
+                        android:textColor="#303030"/>
+                </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/row2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:orientation="horizontal"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/row1">
+                <!-- Кабинет -->
+                <LinearLayout
+                    android:id="@+id/containerOffice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="8dp">
+                    <ImageView
+                        android:id="@+id/imgOffice"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_office_gray" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Кабинет"
+                        android:textSize="12sp"
+                        android:textColor="#303030"/>
+                </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imgOffice"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_office_gray" />
+                <!-- Спальня -->
+                <LinearLayout
+                    android:id="@+id/containerBedroom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="8dp">
+                    <ImageView
+                        android:id="@+id/imgBedroom"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_bedroom_gray" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Спальня"
+                        android:textSize="12sp"
+                        android:textColor="#303030"/>
+                </LinearLayout>
 
-        <ImageView
-            android:id="@+id/imgBedroom"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginStart="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_bedroom_gray" />
+                <!-- Зал -->
+                <LinearLayout
+                    android:id="@+id/containerHall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="8dp">
+                    <ImageView
+                        android:id="@+id/imgHall"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:src="@drawable/ic_hall_gray" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Зал"
+                        android:textSize="12sp"
+                        android:textColor="#303030"/>
+                </LinearLayout>
+            </GridLayout>
 
-        <ImageView
-            android:id="@+id/imgHall"
-            android:layout_width="90dp"
-            android:layout_height="90dp"
-            android:layout_marginStart="16dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_hall_gray" />
+            <GridLayout
+                android:id="@+id/gridCustomTypes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:columnCount="3"
+                android:useDefaultMargins="true" />
 
-    </LinearLayout>
+            <TextView
+                android:id="@+id/btnOther"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="?attr/selectableItemBackground"
+                android:padding="12dp"
+                android:text="Прочее"
+                android:textColor="#2196F3"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:clickable="true"
+                android:focusable="true" />
 
-    <!-- Прочее -->
-
-    <ImageView
-        android:id="@+id/imgOther"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:src="@drawable/ic_add_room_gray"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/row2" />
+        </LinearLayout>
+    </ScrollView>
 
     <Button
         android:id="@+id/btnSave"
@@ -181,6 +281,7 @@
         android:background="@drawable/button_login"
         android:text="Сохранить"
         android:textColor="#FFFFFF"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

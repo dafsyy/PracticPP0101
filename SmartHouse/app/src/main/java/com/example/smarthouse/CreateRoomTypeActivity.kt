@@ -40,6 +40,14 @@ class CreateRoomTypeActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
+            CustomRoomStorage.roomTypes.add(
+                RoomTypeModel(
+                    typeName,
+                    R.drawable.ic_custom_room,
+                    R.drawable.ic_custom_room_gray
+                )
+            )
+
             val resultIntent = Intent()
 
             resultIntent.putExtra(

@@ -4,100 +4,70 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.smarthouse.databinding.ItemDeviceBinding
-import android.content.Intent
 
 class DeviceAdapter(
-    private val devices: List<DeviceModel>
+    private val devices: List<DeviceModel>,
+    private val onDeviceClick: (Int, DeviceModel) -> Unit // Добавляем обработчик клика
 ) : RecyclerView.Adapter<DeviceAdapter.DeviceViewHolder>() {
 
     inner class DeviceViewHolder(
         private val binding: ItemDeviceBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(device: DeviceModel) {
+        fun bind(position: Int, device: DeviceModel) {
+            binding.tvDeviceName.text = device.name
 
-            binding.tvDeviceName.text =
-                device.name
+            // Отображаем мощность только если устройство включено
+            updatePowerDisplay(device)
 
-            binding.tvPower.text =
-                "Мощность: ${device.power} Вт"
+            binding.imgDevice.setImageResource(device.icon)
+            
+            // Отключаем слушатель перед установкой состояния, чтобы избежать зацикливания
+            binding.switchPower.setOnCheckedChangeListener(null)
+            binding.switchPower.isChecked = device.enabled
 
-            binding.imgDevice.setImageResource(
-                device.icon
-            )
-
-            binding.switchPower.isChecked =
-                device.enabled
-
+            // Клик по иконке открывает настройки через RoomDevicesActivity
             binding.imgDevice.setOnClickListener {
-
-                val intent =
-                    Intent(
-                        binding.root.context,
-                        DeviceSettingsActivity::class.java
-                    )
-
-                intent.putExtra(
-                    "DEVICE_NAME",
-                    device.name
-                )
-
-                intent.putExtra(
-                    "DEVICE_TYPE",
-                    device.type
-                )
-
-                binding.root.context.startActivity(intent)
+                onDeviceClick(position, device)
             }
 
             binding.switchPower.setOnCheckedChangeListener { _, checked ->
-
                 device.enabled = checked
-
-                if (checked) {
-
+                
+                // Если мощность еще не была задана (равна 0), ставим дефолтную при включении
+                if (checked && device.power == 0) {
                     device.power = when(device.type) {
-
                         "hood" -> 120
-
                         "floor_heating" -> 500
-
                         else -> 0
                     }
-
-                } else {
-
-                    device.power = 0
                 }
+                
+                updatePowerDisplay(device)
+            }
+        }
 
-                binding.tvPower.text =
-                    "Мощность: ${device.power} Вт"
+        private fun updatePowerDisplay(device: DeviceModel) {
+            if (device.enabled) {
+                binding.tvPower.text = "Мощность: ${device.power} Вт"
+            } else {
+                binding.tvPower.text = "Выключено (0 Вт)"
             }
         }
     }
 
-    override fun onCreateViewHolder(
-        parent: ViewGroup,
-        viewType: Int
-    ): DeviceViewHolder {
-
-        val binding =
-            ItemDeviceBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DeviceViewHolder {
+        val binding = ItemDeviceBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
         return DeviceViewHolder(binding)
     }
 
-    override fun getItemCount() =
-        devices.size
+    override fun getItemCount() = devices.size
 
-    override fun onBindViewHolder(
-        holder: DeviceViewHolder,
-        position: Int
-    ) {
-        holder.bind(devices[position])
+    override fun onBindViewHolder(holder: DeviceViewHolder, position: Int) {
+        holder.bind(position, devices[position])
     }
 }

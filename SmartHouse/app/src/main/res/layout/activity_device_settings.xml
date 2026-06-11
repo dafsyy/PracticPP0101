@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <!-- Шапка -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="90dp"
@@ -21,7 +23,11 @@
                 android:id="@+id/btnBack"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
-                android:src="@drawable/ic_back" />
+                android:src="@drawable/ic_back"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:padding="4dp"/>
 
             <TextView
                 android:id="@+id/tvTitle"
@@ -34,151 +40,206 @@
 
         </LinearLayout>
 
+        <!-- Раздел ВЫТЯЖКИ -->
         <LinearLayout
             android:id="@+id/layoutHood"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Освещение"
-                android:textSize="18sp" />
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <Switch
                 android:id="@+id/switchLight"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="Автовключение"
-                android:textSize="18sp" />
-
-            <Switch
-                android:id="@+id/switchAuto"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_marginTop="20dp"
+                android:text="Режим работы"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <RadioGroup
                 android:id="@+id/radioSpeed"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
-
-                <RadioButton
-                    android:id="@+id/rbLow"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Низкая" />
-
-                <RadioButton
-                    android:id="@+id/rbMedium"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Средняя" />
-
-                <RadioButton
-                    android:id="@+id/rbHigh"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Высокая" />
-
+                android:layout_marginTop="8dp">
+                <RadioButton android:id="@+id/rbLow" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Низкая (10-50 Вт)" />
+                <RadioButton android:id="@+id/rbMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Средняя (60-150 Вт)" />
+                <RadioButton android:id="@+id/rbHigh" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Высокая (160-300 Вт)" />
             </RadioGroup>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Мощность"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <SeekBar
+                android:id="@+id/seekHoodPower"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp" />
+
+            <TextView
+                android:id="@+id/tvHoodPower"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="0 Вт"
+                android:textColor="#F44336"
+                android:textSize="24sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
+        <!-- Раздел ТЕПЛОГО ПОЛА -->
         <LinearLayout
             android:id="@+id/layoutFloor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="16dp">
+            android:padding="20dp"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Температура"
-                android:textSize="18sp" />
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
             <SeekBar
                 android:id="@+id/seekTemperature"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
                 android:max="35" />
 
             <TextView
                 android:id="@+id/tvTemperature"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:text="20°C"
-                android:textSize="18sp" />
+                android:textColor="#2196F3"
+                android:textSize="26sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="24dp"
                 android:text="Дни работы"
-                android:textSize="18sp" />
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            <CheckBox
-                android:id="@+id/cbMon"
+            <!-- Дни в 2 столбика -->
+            <GridLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:columnCount="2">
+                <CheckBox android:id="@+id/cbMon" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:text="Понедельник" />
+                <CheckBox android:id="@+id/cbTue" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:text="Вторник" />
+                <CheckBox android:id="@+id/cbWed" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:text="Среда" />
+                <CheckBox android:id="@+id/cbThu" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:text="Четверг" />
+                <CheckBox android:id="@+id/cbFri" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:text="Пятница" />
+                <CheckBox android:id="@+id/cbSat" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:text="Суббота" />
+                <CheckBox android:id="@+id/cbSun" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_columnWeight="1" android:text="Воскресенье" />
+            </GridLayout>
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Понедельник" />
+                android:layout_marginTop="24dp"
+                android:text="Время работы"
+                android:textColor="#000000"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-            <CheckBox
-                android:id="@+id/cbTue"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Вторник" />
+                android:layout_marginTop="12dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-            <CheckBox
-                android:id="@+id/cbWed"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Среда" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="с"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
-            <CheckBox
-                android:id="@+id/cbThu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Четверг" />
+                <TextView
+                    android:id="@+id/tvTimeFrom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@android:drawable/edit_text"
+                    android:padding="8dp"
+                    android:text="08:00"
+                    android:textColor="#2196F3"
+                    android:textSize="18sp"
+                    android:clickable="true"
+                    android:focusable="true" />
 
-            <CheckBox
-                android:id="@+id/cbFri"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Пятница" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="по"
+                    android:textColor="#000000"
+                    android:textSize="16sp" />
 
-            <CheckBox
-                android:id="@+id/cbSat"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Суббота" />
-
-            <CheckBox
-                android:id="@+id/cbSun"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Воскресенье" />
-
+                <TextView
+                    android:id="@+id/tvTimeTo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:background="@android:drawable/edit_text"
+                    android:padding="8dp"
+                    android:text="22:00"
+                    android:textColor="#2196F3"
+                    android:textSize="18sp"
+                    android:clickable="true"
+                    android:focusable="true" />
+            </LinearLayout>
         </LinearLayout>
-        <Button
+
+        <!-- Кнопка как на экране регистрации -->
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSave"
-            android:layout_width="250dp"
-            android:layout_height="55dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginStart="60dp"
+            android:layout_marginEnd="60dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginBottom="32dp"
             android:background="@drawable/button_login"
             android:backgroundTint="@null"
-            android:text="СОХРАНИТЬ"
-            android:textColor="#FFFFFF"/>
-    </LinearLayout>
+            android:text="Сохранить"
+            android:textColor="#FFFFFF"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
+    </LinearLayout>
 </ScrollView>

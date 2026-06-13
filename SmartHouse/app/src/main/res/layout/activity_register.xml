@@ -70,7 +70,8 @@
                 android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
-                android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent"
+                android:textColor="#003366"/>
 
             <View
                 android:layout_width="match_parent"
@@ -90,7 +91,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:background="@android:color/transparent"
-                android:inputType="textEmailAddress"/>
+                android:inputType="textEmailAddress"
+                android:textColor="#003366"/>
 
             <View
                 android:layout_width="match_parent"
@@ -110,7 +112,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="32dp"
                 android:background="@android:color/transparent"
-                android:inputType="numberPassword"/>
+                android:inputType="numberPassword"
+                android:textColor="#003366"/>
 
             <View
                 android:layout_width="match_parent"

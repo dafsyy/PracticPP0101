@@ -2,6 +2,7 @@ package com.example.smarthouse
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -21,113 +22,46 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.btnLogin.setOnClickListener {
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
 
         binding.btnRegister.setOnClickListener {
+            val name = binding.etUsername.text.toString().trim()
+            val email = binding.etEmail.text.toString().trim()
+            val password = binding.etPassword.text.toString().trim()
 
-            val name =
-                binding.etUsername.text.toString().trim()
-
-            val email =
-                binding.etEmail.text.toString().trim()
-
-            val password =
-                binding.etPassword.text.toString().trim()
-
-            if (name.isEmpty()) {
-
-                Toast.makeText(
-                    this,
-                    "Введите имя",
-                    Toast.LENGTH_SHORT
-                ).show()
-
+            if (name.isEmpty() || email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Заполните все поля", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (email.isEmpty()) {
-
-                Toast.makeText(
-                    this,
-                    "Введите email",
-                    Toast.LENGTH_SHORT
-                ).show()
-
+            // Проверка формата почты (user@domain.com)
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                Toast.makeText(this, "Введите корректный email (напр. user@mail.ru)", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (password.isEmpty()) {
-
-                Toast.makeText(
-                    this,
-                    "Введите пароль",
-                    Toast.LENGTH_SHORT
-                ).show()
-
-                return@setOnClickListener
-            }
-
-            registerUser(
-                name,
-                email,
-                password
-            )
+            registerUser(name, email, password)
         }
     }
 
-    private fun registerUser(
-        name: String,
-        email: String,
-        password: String
-    ) {
-
+    private fun registerUser(name: String, email: String, password: String) {
         lifecycleScope.launch {
-
             try {
-
-                val response =
-                    SupabaseClient.api.registerUser(
-                        UserDto(
-                            name = name,
-                            email = email,
-                            password = password
-                        )
-                    )
+                val response = SupabaseClient.api.registerUser(
+                    UserDto(name = name, email = email, password = password)
+                )
 
                 if (response.isSuccessful) {
-
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        "Регистрация успешна",
-                        Toast.LENGTH_SHORT
-                    ).show()
-
-                    startActivity(
-                        Intent(
-                            this@RegisterActivity,
-                            CreatePinActivity::class.java
-                        )
-                    )
-
+                    Toast.makeText(this@RegisterActivity, "Регистрация успешна! Теперь войдите.", Toast.LENGTH_SHORT).show()
+                    startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
                     finish()
-
                 } else {
-
-                    Toast.makeText(
-                        this@RegisterActivity,
-                        "Ошибка регистрации",
-                        Toast.LENGTH_LONG
-                    ).show()
+                    Toast.makeText(this@RegisterActivity, "Ошибка регистрации", Toast.LENGTH_LONG).show()
                 }
-
             } catch (e: Exception) {
-
-                Toast.makeText(
-                    this@RegisterActivity,
-                    e.message,
-                    Toast.LENGTH_LONG
-                ).show()
+                Toast.makeText(this@RegisterActivity, "Ошибка: ${e.message}", Toast.LENGTH_LONG).show()
             }
         }
     }

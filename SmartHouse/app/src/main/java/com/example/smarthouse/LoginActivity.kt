@@ -17,25 +17,8 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        // Проверка: если пользователь уже вошел и у него есть ПИН, отправляем на ввод ПИН
-        val prefs = getSharedPreferences("SmartHouse", Context.MODE_PRIVATE)
-        val savedUserId = prefs.getString("USER_ID", null)
-        val hasPin = prefs.getBoolean("HAS_PIN", false)
-
-        if (savedUserId != null) {
-            if (hasPin) {
-                startActivity(Intent(this, EnterPinActivity::class.java))
-            } else {
-                val intent = Intent(this, CreatePinActivity::class.java)
-                intent.putExtra("USER_ID", savedUserId)
-                startActivity(intent)
-            }
-            finish()
-        }
 
         binding.btnLogin.setOnClickListener {
             loginUser()
@@ -64,17 +47,20 @@ class LoginActivity : AppCompatActivity() {
 
                 if (response.isSuccessful && !response.body().isNullOrEmpty()) {
                     val user = response.body()!![0]
-
-                    // Сохраняем ID пользователя локально
                     val prefs = getSharedPreferences("SmartHouse", Context.MODE_PRIVATE)
-                    prefs.edit().putString("USER_ID", user.id).apply()
+                    
+                    // Сохраняем ID и PIN (для локальной проверки)
+                    prefs.edit().apply {
+                        putString("USER_ID", user.id)
+                        putString("USER_PIN", user.pin)
+                        apply()
+                    }
 
                     Toast.makeText(this@LoginActivity, "Успешный вход!", Toast.LENGTH_SHORT).show()
 
-                    // Если у пользователя в базе уже есть ПИН (например, зашел с нового устройства)
                     if (!user.pin.isNullOrEmpty()) {
                         prefs.edit().putBoolean("HAS_PIN", true).apply()
-                        startActivity(Intent(this@LoginActivity, EnterPinActivity::class.java))
+                        startActivity(Intent(this@LoginActivity, PinLoginActivity::class.java))
                     } else {
                         val intent = Intent(this@LoginActivity, CreatePinActivity::class.java)
                         intent.putExtra("USER_ID", user.id)
@@ -85,8 +71,7 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this@LoginActivity, "Неверный email или пароль", Toast.LENGTH_SHORT).show()
                 }
             } catch (e: Exception) {
-                Log.e("LOGIN_ERROR", "Ошибка: ${e.message}")
-                Toast.makeText(this@LoginActivity, "Ошибка сети: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@LoginActivity, "Ошибка сети", Toast.LENGTH_SHORT).show()
             }
         }
     }

@@ -1,14 +1,15 @@
 package com.example.smarthouse
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.smarthouse.databinding.ActivityPinLoginBinding
 
 class PinLoginActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityPinLoginBinding
-
     private var pin = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -17,88 +18,58 @@ class PinLoginActivity : AppCompatActivity() {
         binding = ActivityPinLoginBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        binding.btn1.setOnClickListener { addDigit("1") }
-        binding.btn2.setOnClickListener { addDigit("2") }
-        binding.btn3.setOnClickListener { addDigit("3") }
+        val buttons = listOf(
+            binding.btn0, binding.btn1, binding.btn2, binding.btn3, binding.btn4,
+            binding.btn5, binding.btn6, binding.btn7, binding.btn8, binding.btn9
+        )
 
-        binding.btn4.setOnClickListener { addDigit("4") }
-        binding.btn5.setOnClickListener { addDigit("5") }
-        binding.btn6.setOnClickListener { addDigit("6") }
-
-        binding.btn7.setOnClickListener { addDigit("7") }
-        binding.btn8.setOnClickListener { addDigit("8") }
-        binding.btn9.setOnClickListener { addDigit("9") }
-
-        binding.btn0.setOnClickListener { addDigit("0") }
+        buttons.forEachIndexed { index, button ->
+            button.setOnClickListener { addDigit(index.toString()) }
+        }
 
         binding.btnDelete.setOnClickListener {
-
             if (pin.isNotEmpty()) {
-
                 pin = pin.dropLast(1)
-
                 updateDots()
             }
         }
 
         binding.btnLogout.setOnClickListener {
-
-            startActivity(
-                Intent(
-                    this,
-                    LoginActivity::class.java
-                )
-            )
-
+            startActivity(Intent(this, LoginActivity::class.java))
             finish()
         }
     }
 
     private fun addDigit(digit: String) {
-
         if (pin.length < 4) {
-
             pin += digit
-
             updateDots()
 
             if (pin.length == 4) {
+                val prefs = getSharedPreferences("SmartHouse", Context.MODE_PRIVATE)
+                val savedPin = prefs.getString("USER_PIN", "")
 
-                startActivity(
-                    Intent(
-                        this,
-                        AddressActivity::class.java
-                    )
-                )
-
-                finish()
+                if (pin == savedPin) {
+                    val hasAddress = prefs.getBoolean("HAS_ADDRESS", false)
+                    if (hasAddress) {
+                        startActivity(Intent(this, MainActivity::class.java))
+                    } else {
+                        startActivity(Intent(this, AddressActivity::class.java))
+                    }
+                    finish()
+                } else {
+                    Toast.makeText(this, "Неверный ПИН-код", Toast.LENGTH_SHORT).show()
+                    pin = ""
+                    updateDots()
+                }
             }
         }
     }
 
     private fun updateDots() {
-
-        val dots = listOf(
-            binding.dot1,
-            binding.dot2,
-            binding.dot3,
-            binding.dot4
-        )
-
+        val dots = listOf(binding.dot1, binding.dot2, binding.dot3, binding.dot4)
         for (i in dots.indices) {
-
-            if (i < pin.length) {
-
-                dots[i].setBackgroundResource(
-                    R.drawable.pin_dot_filled
-                )
-
-            } else {
-
-                dots[i].setBackgroundResource(
-                    R.drawable.pin_dot_empty
-                )
-            }
+            dots[i].setBackgroundResource(if (i < pin.length) R.drawable.pin_dot_filled else R.drawable.pin_dot_empty)
         }
     }
 }

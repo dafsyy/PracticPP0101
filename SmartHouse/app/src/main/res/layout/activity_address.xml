@@ -20,8 +20,8 @@
 
         <ImageView
             android:id="@+id/btnBack"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:src="@drawable/ic_back"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:clickable="true"
@@ -44,13 +44,74 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="40dp"
-        android:text="Добавьте адрес своего дома в формате&#10;г. Название города, ул. Название улицы,&#10;д. Номер дома, кв. Номер квартиры"
+        android:layout_marginTop="32dp"
+        android:text="Выберите тип жилья и введите адрес. Для квартир обязательно указывайте номер квартиры. Вводимый адрес должен соответствовать примеру."
         android:textColor="#000000"
         android:textSize="16sp"
+        android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/header"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- Выбор типа жилья -->
+    <LinearLayout
+        android:id="@+id/layoutTypeSelection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/tvInfo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/btnPrivateHouse"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+            <ImageView
+                android:id="@+id/imgPrivateHouse"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_private_house"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Частный дом"
+                android:textSize="12sp"
+                android:textColor="#303030"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/btnApartment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:gravity="center"
+            android:orientation="vertical"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true">
+            <ImageView
+                android:id="@+id/imgApartment"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:src="@drawable/ic_apartment_gray"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Квартира"
+                android:textSize="12sp"
+                android:textColor="#303030"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
     <EditText
         android:id="@+id/etAddress"
@@ -58,12 +119,13 @@
         android:layout_height="56dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="24dp"
         android:background="@drawable/address_input"
-        android:hint="Введите адрес"
+        android:hint="г. Москва, ул. Ленина, д. 1"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/tvInfo"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@id/layoutTypeSelection"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
